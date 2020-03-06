@@ -1,5 +1,168 @@
 <template>
-  <div class="home">
-    首页
+  <div id="home">
+    <nav-bar class="home-nav">
+      <div slot="center">蘑菇街</div>
+    </nav-bar>
+    <tab-control
+      class="tab-control"
+      :titles="['流行', '新款', '精选']"
+      @tabClick="tabClickHome"
+      ref="topTabControl"
+      v-show="isTabFixed"
+    />
+
+    <scroll
+      class="content"
+      ref="scroll"
+      :probe-type="3"
+      @scroll="contentScroll"
+      :pull-up-load="true"
+      @pullingUp="loadMore"
+    >
+      <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad" />
+      <recommend-view :recommends="recommends" />
+      <tab-control
+        :titles="['流行', '新款', '精选']"
+        @tabClick="tabClick"
+        ref="tabControl"
+      />
+      <goods-list :goods-list="showGoods" />
+    </scroll>
+    <back-top @click.native="backTop" v-show="isShowBackTop" />
   </div>
 </template>
+
+<script>
+import NavBar from "components/common/navbar/NavBar";
+import Scroll from "components/common/scroll/Scroll";
+import HomeSwiper from "./childComps/HomeSwiper";
+import RecommendView from "views/home/childComps/RecommendView";
+import TabControl from "components/content/tabcontrol/TabControl";
+import GoodsList from "components/content/goods/GoodsList";
+
+import {
+  getHomeMultidata,
+  BANNER,
+  RECOMMEND,
+  getHomeGoods
+} from "network/home";
+import { debounce } from "common/until";
+import { itemListenerMixin, backTopMixin, tabControlMixin } from "common/mixin";
+import { NEW, POP, SELL, BACKTOP_DISTANCE } from "@/common/const";
+
+export default {
+  name: "Home",
+  components: {
+    NavBar,
+    HomeSwiper,
+    RecommendView,
+    TabControl,
+    GoodsList,
+    Scroll
+  },
+  mixins: [itemListenerMixin, backTopMixin, tabControlMixin],
+  data() {
+    return {
+      banners: [],
+      recommends: [],
+      goodsList: {
+        pop: { page: 0, list: [] },
+        new: { page: 0, list: [] },
+        sell: { page: 0, list: [] }
+      },
+      currentType: POP,
+
+      tabOffsetTop: 0,
+      isTabFixed: false
+    };
+  },
+  created() {
+    /* create 最好是写主要逻辑，不用写具体内容 */
+    // 1. 请求多个数据，不写this会默认为调用上面的import的getHomeMultidata()
+    this._getHomeMultidata();
+
+    // 2. 请求商品数据
+    this._getHomeGoods(POP);
+    this._getHomeGoods(NEW);
+    this._getHomeGoods(SELL);
+  },
+  deactivated() {
+    // 移除 itemImageLoad 事件监听器。
+    this.$bus.$off("itemImageLoad", this.itemImgListener);
+  },
+  computed: {
+    showGoods() {
+      return this.goodsList[this.currentType].list;
+    }
+  },
+  methods: {
+    /* topControl事件监听的方法 */
+    tabClickHome(index) {
+      this.tabClick(index);
+
+      // 让两个tabControl的currentIndex保持一致
+      this.$refs.topTabControl.currentIndex = index;
+      this.$refs.tabControl.currentIndex = index;
+    },
+
+    contentScroll(position) {
+      // 1.判断BackTop是否显示
+      this.isShowBackTop = -position.y > BACKTOP_DISTANCE;
+
+      // 2.判断tabControl是否吸顶(position: fixed)
+      this.isTabFixed = -position.y > this.tabOffsetTop;
+    },
+    loadMore() {
+      // 加载当前currentType的下一页数据
+      this._getHomeGoods(this.currentType);
+    },
+    swiperImageLoad() {
+      // console.log(this.$refs.tabControl.$el.offsetTop);
+      this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop;
+    },
+
+    /* 网络请求相关的方法 */
+    _getHomeMultidata() {
+      getHomeMultidata().then(res => {
+        this.banners = res.data[BANNER].list;
+        this.recommends = res.data[RECOMMEND].list;
+      });
+    },
+    _getHomeGoods(type) {
+      const page = this.goodsList[type].page + 1;
+      getHomeGoods(type, page).then(res => {
+        this.goodsList[type].list.push(...res.data.list);
+        this.goodsList[type].page += 1;
+
+        //完成上拉加载更多，要是不用finishPullUp，只能下拉加载一次
+        this.$refs.scroll.finishPullUp();
+      });
+    }
+  }
+};
+</script>
+
+<style scoped>
+#home {
+  height: 100vh;
+}
+.home-nav {
+  background-color: var(--color-tint);
+  color: #fff;
+}
+.content {
+  overflow: hidden;
+  position: absolute;
+  top: 44px;
+  bottom: 45px;
+  left: 0;
+  right: 0;
+  /* calc计算属性，tab-control吸顶时不平滑，没有absolute平滑 */
+  /* height: calc(100% - 89px); */
+}
+.tab-control {
+  position: relative;
+  z-index: 9;
+  background-color: var(--color-background);
+}
+</style>

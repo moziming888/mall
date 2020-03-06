@@ -1,56 +1,47 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '@views/home/Home.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "views/home/Home.vue";
 
-Vue.use(VueRouter)
+const Category = () => import("views/category/Category.vue");
+const Cart = () => import("views/cart/Cart.vue");
+const Profile = () => import("views/profile/Profile.vue");
+const Detail = () => import("views/detail/Detail.vue");
+
+Vue.use(VueRouter);
 
 const routes = [
   {
-		path: '/',
-		redirect: '/home'
-	},
+    path: "/",
+    redirect: "/home"
+  },
   {
-    path: '/home',
-    name: 'home',
+    path: "/home",
     component: Home
   },
   {
-    path: '/category',
-    name: 'category',
-    component: () => import('@views/category/Category.vue')
+    path: "/category",
+    component: Category
   },
   {
-    path: '/shopcart',
-    name: 'shopcart',
-    component: () => import('@views/shopcart/ShopCart.vue')
+    path: "/cart",
+    component: Cart
   },
   {
-    path: '/profile',
-    name: 'profile',
-    component: () => import('@views/profile/Profile.vue')
+    path: "/profile",
+    component: Profile
   },
   {
-    path: '/maintabbar',
-    name: 'maintabbar',
-    component: () => import('@components/MainTabBar.vue')
-  },
-  {
-    path: '/tabbar',
-    name: 'tabbar',
-    component: () => import('@components/tabbar/TabBar.vue')
-  },
-  {
-    path: '/tabbaritem',
-    name: 'tabbaritem',
-    component: () => import('@components/tabbar/TabBarItem.vue')
+    path: "/detail/:id",
+    component: Detail,
+    props: true
   }
-]
+];
 
 const router = new VueRouter({
-  mode: 'history',
-  linkActiveClass: 'active',
-  base: process.env.BASE_URL,
+  mode: "history",
+  linkActiveClass: "active",
+  // base: process.env.BASE_URL,
   routes
-})
+});
 
-export default router
+export default router;
