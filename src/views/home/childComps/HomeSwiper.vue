@@ -5,10 +5,15 @@
       v-for="(item, index) in banners"
       :key="index"
     >
-      <a :href="item.link">
+      <router-link to="/category">
         <img :src="item.image" alt="" @load="imageLoad" />
-      </a>
+      </router-link>
     </swiper-slide>
+    <!-- <swiper-slide class="swiper-slide">
+      <router-link to="/category">
+        <img :src="banners[1].image" alt="" @load="imageLoad" />
+      </router-link>
+    </swiper-slide> -->
     <!-- 分页器 -->
     <div class="swiper-pagination" slot="pagination"></div>
   </swiper>
@@ -30,7 +35,6 @@ export default {
       isLoad: false,
       swiperOption: {
         loop: true,
-        autoplay: true,
         autoplay: {
           delay: 2000,
           // 当用户滑动图片后继续自动轮播
@@ -49,7 +53,6 @@ export default {
       return this.$refs.homeSwiper.swiper;
     }
   },
-
   methods: {
     imageLoad() {
       if (!this.isLoad) {
@@ -62,11 +65,17 @@ export default {
 </script>
 
 <style scoped>
-/* 因为有scoped，直接写样式， swiper-pagination会不生效，只能引用*/
-@import "~assets/css/swiper-pagination.css";
-
 .swiper-slide img {
   width: 100%;
-  text-align: center
+  text-align: center;
+}
+.swiper-pagination /deep/ .swiper-pagination-bullet {
+  opacity: 1;
+  background: var(--color-white);
+}
+
+.swiper-pagination /deep/ .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: var(--color-high-text);
 }
 </style>

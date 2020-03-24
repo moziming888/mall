@@ -1,12 +1,6 @@
 <template>
   <nav-bar class="detail-nav-bar">
-    <img
-      slot="left"
-      class="back"
-      @click="backClick"
-      src="~assets/img/common/back.svg"
-      alt=""
-    />
+    <i class="back el-icon-arrow-left" slot="left" @click="backClick"></i>
     <div slot="center" class="title">
       <span
         class="title-item "
@@ -18,14 +12,14 @@
         {{ item }}
       </span>
     </div>
-
-    <img
+    <i class="cart el-icon-shopping-cart-2" slot="right" @click="cartClick"></i>
+    <!-- <img
       slot="right"
       class="cart"
       @click="cartClick"
       src="~assets/img/detail/cart.svg"
       alt=""
-    />
+    /> -->
   </nav-bar>
 </template>
 
@@ -43,10 +37,6 @@ export default {
         return ["商品", "参数", "评论", "推荐"];
       }
     }
-    // currentIndex: {
-    //   type: Number,
-    //   default: 0
-    // }
   },
   data() {
     return {
@@ -57,7 +47,6 @@ export default {
     itemClick(index) {
       this.currentIndex = index;
       this.$emit("titleClick", index);
-      // console.log(index);
     },
     backClick() {
       this.$router.back();
@@ -72,15 +61,15 @@ export default {
 <style scoped>
 .detail-nav-bar {
   font-weight: normal;
-  background: var(--color-background);
+  background: var(--color-white);
 }
 .back {
-  margin-top: 11px;
+  font-size: 1.5rem;
 }
 .title {
   display: flex;
-  font-size: 1em;
   align-items: center;
+  font-size: 1.1rem;
 }
 .title-item {
   flex: 1;
@@ -89,8 +78,6 @@ export default {
   color: var(--color-high-text);
 }
 .cart {
-  width: 56px;
-  height: 26px;
-  margin-top: 10px;
+  font-size: 1.5rem;
 }
 </style>

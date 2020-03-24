@@ -31,10 +31,10 @@ export default {
 <style scoped>
 .nav-bar {
   background-color: var(--color-tint);
-  color: #fff;
+  color: var(--color-white);
 }
 .text {
-  font-size: 1.1em;
+  font-size: 1.1rem;
   text-align: center;
   margin-top: 20%;
 }

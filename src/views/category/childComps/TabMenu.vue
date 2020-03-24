@@ -47,9 +47,9 @@ export default {
 </script>
 <style scoped>
 #menu {
-  height: calc(100vh - 44px - 45px);
-  width: 90px;
-  background-color: #f6f6f6;
+  height: calc(100vh - 2.75rem - 2.75rem);
+  width: 5.5rem;
+  background-color: var(--color-background);
   position: relative;
 }
 .content {
@@ -61,17 +61,16 @@ export default {
   right: 0;
 }
 .menu-list {
-  width: 90px;
+  width: 5.5rem;
 }
 .menu-list-item {
-  height: 45px;
-  line-height: 45px;
+  line-height: 2.8rem;
   text-align: center;
 }
 .menu-list-item.active {
   font-weight: 700;
   color: var(--color-high-text);
-  background-color: #fff;
+  background-color: var(--color-white);
   border-left: 3px solid var(--color-high-text);
 }
 </style>

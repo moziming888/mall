@@ -1,6 +1,6 @@
 .swiper-pagination .swiper-pagination-bullet {
   opacity: 1;
-  background: var(--color-background);
+  background: var(--color-white);
 }
 
 .swiper-pagination .swiper-pagination-bullet-active {

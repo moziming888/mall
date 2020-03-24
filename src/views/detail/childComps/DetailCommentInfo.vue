@@ -54,22 +54,22 @@ export default {
 </script>
 <style scoped>
 .commwnt-info {
-  padding: 20px 15px;
+  padding: 1.25rem 1rem;
   border-bottom: 3px solid rgba(0, 0, 0, 0.1);
 }
 .comment-header {
   display: flex;
   justify-content: space-between;
-  margin: 10px 0;
+  margin: 0.6rem 0;
 }
 .comment-user {
   display: flex;
   align-items: center;
-  margin: 8px 0;
+  margin: 0.5rem 0;
 }
 .comment-user img {
-  width: 3em;
-  height: 3em;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
 }
 .comment-user span {
@@ -78,8 +78,6 @@ export default {
 .comment-detail .info-other {
   font-size: 0.8em;
   padding: 0.5em 0;
-}
-.info-imgs {
 }
 .info-imgs img {
   width: 24%;

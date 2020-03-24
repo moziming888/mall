@@ -114,7 +114,6 @@ export default {
 
         // 4.获取商家信息
         this.shopInfo = data.shopInfo;
-
         // 5.保存商品详细数据
         this.goodsInfo = data.detailInfo;
 
@@ -188,13 +187,13 @@ export default {
       const product = {};
       // 2.对象信息
       product.iid = this.iid;
+      product.name = this.shopInfo.name;
       product.imgURL = this.topImages[0];
       product.title = this.baseInfo.title;
       product.desc = this.baseInfo.desc;
       product.realPrice = this.baseInfo.realPrice;
       // 3.添加到Store中
       this.$store.dispatch("addCart", product);
-      // this.$store.commit("addCart", product);
     }
   }
 };
@@ -204,7 +203,7 @@ export default {
   height: 100vh;
   position: relative;
   z-index: 1;
-  background: #fff;
+  background: var(--color-white);
 }
 .content {
   overflow: hidden;

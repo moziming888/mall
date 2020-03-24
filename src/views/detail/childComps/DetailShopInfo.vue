@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="shop-bottom">
-      <a class="enter-shop" :href="shopInfo.shopUrl">进店逛逛</a>
+      <router-link class="enter-shop" to="/">进店逛逛</router-link>
     </div>
   </div>
 </template>
@@ -109,7 +109,7 @@ export default {
 }
 .shop-middle-right .better span {
   background-color: #5ea732;
-  color: #fff;
+  color: var(--color-white);
   text-align: center;
 }
 .shop-middle-right .better-more span {

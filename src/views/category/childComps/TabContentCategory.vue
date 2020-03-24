@@ -1,16 +1,11 @@
 <template>
-  <div>
-    <div :xs="8" :sm="6" :md="4" :lg="3">
-      <div
-        class="item"
-        v-for="(item, index) in subcategories.list"
-        :key="index"
-      >
-        <a :href="item.link">
-          <img class="item-img" v-lazy="item.image" @load="imageLoad" alt="" />
-          <div class="item-text">{{ item.title }}</div>
-        </a>
-      </div>
+  <div class="category">
+    <div class="item" v-for="(item, index) in subcategories.list" :key="index">
+      <!-- <router-link :to="item.link" class="item-link"> -->
+      <router-link to="/" class="item-link">
+        <img class="item-img" v-lazy="item.image" @load="imageLoad" alt="" />
+        <div class="item-text">{{ item.title }}</div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -35,16 +30,30 @@ export default {
 };
 </script>
 <style scoped>
-.item {
-  text-align: center;
-  font-size: 12px;
+.category {
+  width: 100%;
+  padding: 0.4rem 0.2rem;
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
-
+.item {
+  width: 33%;
+  text-align: center;
+  font-size: 0.8rem;
+}
 .item-img {
   width: 80%;
 }
 
 .item-text {
-  margin-top: 15px;
+  margin: 0.3rem 0 1rem;
+}
+@media (min-width: 500px) {
+  .item {
+    width: 20%;
+    font-size: 0.9rem;
+  }
 }
 </style>

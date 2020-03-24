@@ -4,12 +4,9 @@
     <div class="info-price">
       <span class="new-price">{{ baseInfo.newPrice }}</span>
       <span class="old-price">{{ baseInfo.oldPrice }}</span>
-      <span
-        class="discount-desc"
-        v-if="baseInfo.discountDesc"
-        :style="{ background: baseInfo.discountBgColor }"
-        >{{ baseInfo.discountDesc }}</span
-      >
+      <span class="discount-desc" v-if="baseInfo.discountDesc">{{
+        baseInfo.discountDesc
+      }}</span>
     </div>
     <div class="info-other">
       <span>{{ baseInfo.columns[0] }}</span>
@@ -22,7 +19,8 @@
         v-for="(item, index) in baseInfo.services.length - 1"
         :key="index"
       >
-        <img :src="baseInfo.services[item - 1].icon" alt="" />
+        <i class="el-icon-circle-check"></i>
+        <!-- <img :src="baseInfo.services[item - 1].icon" alt="" /> -->
         <span>{{ baseInfo.services[item - 1].name }}</span>
       </span>
     </div>
@@ -44,55 +42,54 @@ export default {
 </script>
 <style scoped>
 .base-info {
-  margin-top: 15px;
-  padding: 0 8px;
-  border-bottom: 4px solid rgba(100, 100, 100, 0.1);
+  margin-top: 1rem;
+  padding: 0 0.5rem;
+  border-bottom: 0.2rem solid rgba(100, 100, 100, 0.1);
 }
 .info-title {
   font-weight: bold;
 }
 .info-price {
-  padding: 10px 0;
+  padding: 0.6rem 0;
 }
 .info-price .new-price {
   color: var(--color-high-text);
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 .info-price .old-price {
   text-decoration: line-through;
-  font-size: 0.8em;
-  margin-left: 5px;
+  font-size: 0.8rem;
+  margin-left: 0.3rem;
 }
 .info-price .discount-desc {
   font-size: 0.8em;
-  padding: 2px 8px;
-  margin-left: 5px;
-  color: #fff;
-  /* background: var(--color-high-text); */
-  border-radius: 8px;
+  padding: 0.2rem 0.5rem;
+  margin-left: 0.5rem;
+  color: var(--color-white);
+  background: var(--color-high-text);
+  border-radius: 0.5rem;
   position: relative;
-  top: -5px;
+  top: -0.1rem;
 }
 .info-other {
   display: flex;
   justify-content: space-between;
-  font-size: 0.6em;
-  padding: 5px 0;
+  font-size: 0.6rem;
+  padding: 0.3rem 0;
   border-bottom: 1px solid rgba(100, 100, 100, 0.1);
 }
 .info-service {
   display: flex;
   justify-content: space-between;
-  padding: 15px 0;
+  align-content: center;
+  padding: 1.3rem 0;
 }
-.info-service-item img {
-  width: 14px;
-  position: relative;
-  top: 2px;
-  right: 1px;
+.info-service-item i {
+  margin-right: 0.2rem;
 }
 .info-service-item span {
-  font-size: 0.8em;
-  color: #333;
+  font-size: 0.8rem;
+  color: var(--color-black-s);
+  /* line-height: 1.5rem; */
 }
 </style>

@@ -1,10 +1,11 @@
 <template>
   <div class="recommend">
     <div v-for="item in recommends" :key="item.id" class="recommend-item">
-      <a :href="item.link">
+      <router-link to="/category">
+        <!-- <router-link :to="item.link"> -->
         <img :src="item.image" alt="" />
         <div>{{ item.title }}</div>
-      </a>
+      </router-link>
     </div>
   </div>
 </template>
@@ -29,13 +30,13 @@ export default {
   align-items: center;
   text-align: center;
   flex-wrap: wrap;
-  font-size: 13px;
-  margin-bottom: 10px;
+  font-size: 0.8rem;
+  margin-bottom: 0.6rem;
 }
 .recommend-item {
   flex-grow: 4;
 }
 .recommend-item img {
-  max-width: 70px;
+  max-width: 4.375rem;
 }
 </style>

@@ -1,9 +1,8 @@
 <template>
   <div class="check-button" :class="{ check: isChecked }">
-    <img src="~assets/img/cart/tick.svg" alt="" />
+    <i class="el-icon-success"></i>
   </div>
 </template>
-
 <script>
 export default {
   name: "CheckButton",
@@ -17,17 +16,10 @@ export default {
 </script>
 <style scoped>
 .check-button {
-  border-radius: 50%;
-  border: 2px solid #aaa;
-  width: 18x;
-  height: 18px;
-}
-.check-button img {
-  width: 14px;
-  height: 14px;
+  font-size: 1.2rem;
+  color: var(--color-gray-deep);
 }
 .check {
-  border-color: var(--color-high-text);
-  background: var(--color-high-text);
+  color: var(--color-high-text);
 }
 </style>

@@ -3,10 +3,17 @@
     <nav-bar class="nav-bar">
       <div slot="center">商品分类</div>
     </nav-bar>
+    <tab-control
+      class="tab-control top-tab-control"
+      :titles="['综合', '新品', '销量']"
+      @tabClick="tabClick"
+      ref="topTabControl"
+      v-show="isTabFixed"
+    />
     <tab-menu class="menu" :categories="categories" @selectItem="selectItem" />
 
     <scroll
-      class="content"
+      class="scroll-content"
       ref="scroll"
       :probe-type="3"
       @scroll="contentScroll"
@@ -20,6 +27,7 @@
         class="tab-control"
         :titles="['综合', '新品', '销量']"
         @tabClick="tabClick"
+        ref="tabControl"
       />
       <tab-content-goods :category-goods="showCategoryGoods" />
     </scroll>
@@ -59,7 +67,8 @@ export default {
     return {
       categories: [],
       categoryData: {},
-      currentIndex: -1
+      currentIndex: -1,
+      isTabFixed: false
     };
   },
   created() {
@@ -136,10 +145,6 @@ export default {
     /**
      * 事件监听的方法
      */
-    contentScroll(position) {
-      // 是否显示返回顶部图标
-      this.isShowBackTop = -position.y > BACKTOP_DISTANCE;
-    },
     selectItem(index) {
       // 点击分类显示对应的子分类
       this._getSubcategories(index);
@@ -147,6 +152,20 @@ export default {
     subImageLoad() {
       // 子分类subcategory图片的防抖,newRefresh在minix里面
       this.newRefresh();
+    },
+    contentScroll(position) {
+      // 1.是否显示返回顶部图标
+      this.isShowBackTop = -position.y > BACKTOP_DISTANCE;
+      // 2.判断tabControl是否吸顶(position: fixed)
+      this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop;
+      this.isTabFixed = -position.y > this.tabOffsetTop;
+    },
+    /* topControl事件监听 */
+    tabClickHome(index) {
+      this.tabClick(index);
+      // 让两个tabControl的currentIndex保持一致
+      this.$refs.topTabControl.currentIndex = index;
+      this.$refs.tabControl.currentIndex = index;
     }
   }
 };
@@ -157,19 +176,30 @@ export default {
 }
 .nav-bar {
   background-color: var(--color-tint);
-  color: #fff;
+  color: var(--color-white);
 }
-.content {
+.scroll-content {
   overflow: hidden;
   position: absolute;
-  top: 44px;
-  bottom: 45px;
-  left: 90px;
+  top: 2.75rem;
+  bottom: 2.75rem;
+  left: 5.625rem;
   right: 0;
   /* calc计算属性，tab-control吸顶时不平滑，没有absolute平滑 */
   /* height: calc(100% - 89px); */
 }
-#category .el-aside {
-  width: 80px;
+.tab-control {
+  position: relative;
+  z-index: 9;
+  background-color: var(--color-white);
+}
+.top-tab-control {
+  width: calc(100vw - 5.5rem);
+  padding-left: 2px;
+  position: absolute;
+  top: 2.75rem;
+  left: 5.5rem;
+  right: 0;
+  z-index: 999;
 }
 </style>

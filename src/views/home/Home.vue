@@ -12,7 +12,7 @@
     />
 
     <scroll
-      class="content"
+      class="scroll-content"
       ref="scroll"
       :probe-type="3"
       @scroll="contentScroll"
@@ -77,10 +77,8 @@ export default {
     };
   },
   created() {
-    /* create 最好是写主要逻辑，不用写具体内容 */
-    // 1. 请求多个数据，不写this会默认为调用上面的import的getHomeMultidata()
+    // 1. 请求多个数据
     this._getHomeMultidata();
-
     // 2. 请求商品数据
     this._getHomeGoods(POP);
     this._getHomeGoods(NEW);
@@ -148,13 +146,13 @@ export default {
 }
 .home-nav {
   background-color: var(--color-tint);
-  color: #fff;
+  color: var(--color-white);
 }
-.content {
+.scroll-content {
   overflow: hidden;
   position: absolute;
-  top: 44px;
-  bottom: 45px;
+  top: 2.75rem;
+  bottom: 2.75rem;
   left: 0;
   right: 0;
   /* calc计算属性，tab-control吸顶时不平滑，没有absolute平滑 */
@@ -163,6 +161,6 @@ export default {
 .tab-control {
   position: relative;
   z-index: 9;
-  background-color: var(--color-background);
+  background-color: var(--color-white);
 }
 </style>

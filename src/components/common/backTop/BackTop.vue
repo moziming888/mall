@@ -1,6 +1,6 @@
 <template>
   <div class="back-top">
-    <img src="~assets/img/common/top.png" alt="" />
+    <i class="icon-top el-icon-top"></i>
   </div>
 </template>
 
@@ -12,10 +12,16 @@ export default {
 <style scoped sass>
 .back-top {
   position: fixed;
-  right: 6px;
-  bottom: 55px;
+  right: 0.4rem;
+  bottom: 3.5rem;
+  padding: 0.2rem;
+  background-color: var(--color-background);
+  border-radius: 50%;
+  box-shadow: 0 0 0.4rem var(--color-gray-s);
 }
-.back-top img {
-  width: 43px;
+.back-top .icon-top {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-high-text);
 }
 </style>

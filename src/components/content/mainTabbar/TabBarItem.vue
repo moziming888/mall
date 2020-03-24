@@ -1,13 +1,14 @@
 <template>
-  <div class="tab-bar-item" @click="itemClick">
-    <div class="item-icon" v-show="!isActive">
+  <div
+    class="tabbar-item"
+    :class="$router.replace === this.path ? 'active' : ''"
+    @click="itemClick"
+  >
+    <div class="item-icon">
       <slot name="icon"></slot>
     </div>
-    <div class="item-active-icon" v-show="isActive">
-      <slot name="active-icon"> </slot>
-    </div>
-    <div class="item-text" :style="activeStyle">
-      <slot name="text"></slot>
+    <div class="item-label">
+      <slot name="label"></slot>
     </div>
   </div>
 </template>
@@ -19,19 +20,12 @@ export default {
     path: {
       type: String,
       required: true
-    },
-    activeColor: {
-      type: String,
-      default: "#f00"
     }
   },
-  computed: {
-    isActive() {
-      return this.$route.path.indexOf(this.path) !== -1;
-    },
-    activeStyle() {
-      return this.isActive ? { color: this.activeColor } : {};
-    }
+  data() {
+    return {
+      active: true
+    };
   },
   methods: {
     itemClick() {
@@ -43,20 +37,16 @@ export default {
 </script>
 
 <style scoped>
-.tab-bar-item {
+.tabbar-item {
   flex: 1;
 }
-.item-icon img,
-.item-active-icon img {
-  width: 24px;
-  height: 24px;
-  margin-top: 5px;
-  vertical-align: middle;
+.item-icon {
+  font-size: 1.5rem;
 }
-
-.item-text {
-  font-size: 12px;
-  margin-top: 3px;
-  color: #333;
+.item-label {
+  font-size: 0.8rem;
+}
+.active {
+  color: #f00;
 }
 </style>

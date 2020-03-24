@@ -17,13 +17,13 @@ export default {
   position: relative;
   z-index: 10;
   display: flex;
-  height: 44px;
-  line-height: 44px;
+  align-items: center;
+  height: 2.75rem;
   text-align: center;
 }
 .left,
 .right {
-  width: 60px;
+  width: 3.75rem;
 }
 .center {
   flex: 1;

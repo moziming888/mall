@@ -1,17 +1,24 @@
 <template>
-  <div id="shop-item">
-    <div class="item-selector">
-      <check-button :is-checked="baseInfo.checked" @click.native="checkClick" />
+  <div class="shop-item">
+    <div class="item-sell">
+      {{ shopInfo.name }}
     </div>
-    <div class="item-img">
-      <img :src="baseInfo.imgURL" alt="商品图片" />
-    </div>
-    <div class="item-info">
-      <div class="item-title">{{ baseInfo.title }}</div>
-      <div class="item-desc">商品描述: {{ baseInfo.desc }}</div>
-      <div class="info-bottom">
-        <div class="item-price left">¥{{ baseInfo.realPrice }}</div>
-        <div class="item-count right">x{{ baseInfo.count }}</div>
+    <div class="item-content">
+      <div class="item-selector">
+        <check-button
+          :is-checked="baseInfo.checked"
+          @click.native="checkClick"
+        />
+      </div>
+      <div class="item-img">
+        <img :src="baseInfo.imgURL" alt="商品图片" />
+      </div>
+      <div class="item-info">
+        <div class="item-title">{{ baseInfo.title }}</div>
+        <div class="info-bottom">
+          <div class="item-price left">¥{{ baseInfo.realPrice }}</div>
+          <div class="item-count right">x{{ baseInfo.count }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -31,6 +38,12 @@ export default {
       default() {
         return {};
       }
+    },
+    shopInfo: {
+      type: Object,
+      default() {
+        return {};
+      }
     }
   },
   methods: {
@@ -41,54 +54,64 @@ export default {
 };
 </script>
 <style scoped>
-#shop-item {
+.shop-item {
   width: 100%;
-  display: flex;
-  padding: 5px;
-  border-bottom: 1px solid #ccc;
+  margin-bottom: 0.5rem;
 }
-.item-selector {
-  /* width: 18px; */
+.item-sell {
+  padding: 0.5rem 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-black);
+}
+.item-content {
+  display: flex;
+  padding: 0.3rem;
+  border-bottom: 1px solid var(--color-gray);
+}
+.item-content .item-selector {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.item-title,
-.item-desc {
-  overflow: hidden;
+.item-content .item-title {
+  /* overflow: hidden;
   white-space: nowrap;
+  text-overflow: ellipsis; */
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
-.item-img {
-  padding: 5px;
+.item-content .item-img {
+  padding: 0.3rem;
 }
-.item-img img {
-  width: 80px;
-  height: 100px;
-  display: block;
-  border-radius: 5px;
+.item-content .item-img img {
+  width: 5.5rem;
+  height: 6.25rem;
+  overflow: hidden;
+  border-radius: 0.3rem;
 }
-.item-info {
-  font-size: 1.2em;
-  color: #333;
-  padding: 5px 10px;
+.item-content .item-info {
+  font-size: 1rem;
+  padding: 0.3rem 0.6rem;
   position: relative;
   overflow: hidden;
 }
-.item-info .item-desc {
-  color: #666;
-  margin-top: 15px;
-}
-.info-bottom {
-  margin-top: 10px;
+
+.item-content .info-bottom {
+  margin-top: 0.6rem;
   position: absolute;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
+  bottom: 0.6rem;
+  left: 0.6rem;
+  right: 0.6rem;
 }
 
-.info-bottom .item-price {
-  color: orangered;
+.item-content .info-bottom .item-price {
+  color: var(--color-orange);
 }
 </style>

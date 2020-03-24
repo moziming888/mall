@@ -1,17 +1,9 @@
 <template>
   <div class="bottom-bar">
     <div class="bar-item bar-left">
-      <div>
-        <i class="icon service"></i>
-        <span class="text">客服</span>
-      </div>
-      <div>
-        <i class="icon shop"></i>
-        <span class="text">店铺</span>
-      </div>
-      <div>
-        <i class="icon select"></i>
-        <span class="text">收藏</span>
+      <div v-for="(item, index) in BarList" :key="index">
+        <i class="icon" :class="item.icon"></i>
+        <span class="text">{{ item.name }}</span>
       </div>
     </div>
     <div class="bar-item bar-right">
@@ -24,6 +16,24 @@
 <script>
 export default {
   name: "DetailBottomBar",
+  data() {
+    return {
+      BarList: [
+        {
+          name: "客服",
+          icon: "el-icon-chat-dot-round"
+        },
+        {
+          name: "店铺",
+          icon: "el-icon-takeaway-box"
+        },
+        {
+          name: "收藏",
+          icon: "el-icon-star-off"
+        }
+      ]
+    };
+  },
   methods: {
     addToCart() {
       this.$emit("addToCart");
@@ -39,8 +49,8 @@ export default {
 </script>
 <style scoped>
 .bottom-bar {
-  height: 52px;
-  background: #fff;
+  height: 3.25rem;
+  background: var(--color-background);
   position: fixed;
   left: 0;
   right: 0;
@@ -50,47 +60,45 @@ export default {
   justify-content: space-around;
 }
 .bar-item {
-  /* flex: 1; */
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 }
 .bar-left {
   width: 40%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 .bar-left .icon {
+  font-size: 1.3rem;
+}
+.bar-left .text {
   display: block;
-  width: 20px;
-  height: 20px;
-  margin: 5px auto 3px;
-  background: url("~assets/img/detail/detail_bottom.png") 0 0/100%;
-}
-.bar-left span {
-  font-size: 0.8em;
-}
-.bar-left .service {
-  background-position: 0 -48px;
-}
-.bar-left .shop {
-  background-position: 0 -90px;
+  font-size: 0.6rem;
+  padding-top: 0.1rem;
 }
 .bar-right {
-  /* flex: 1; */
-  color: #fff;
-
-  margin: 10px 0;
+  color: var(--color-white);
+  margin: 0.6rem 0;
 }
 .bar-right .cart,
 .bar-right .buy {
-  padding: 8px 16px;
+  padding: 0.5rem 1rem;
 }
 .bar-right .cart {
   background: linear-gradient(to right, #fec806, #fe9505);
-  border-radius: 20px 0 0 20px;
+  border-radius: 1.25rem 0 0 1.25rem;
 }
 
 .bar-right .buy {
   background: linear-gradient(to right, #fd7801, #fd4c06);
-  border-radius: 0 20px 20px 0;
+  border-radius: 0 1.25rem 1.25rem 0;
+}
+@media (max-width: 350px) {
+  .bar-right .cart,
+  .bar-right .buy {
+    padding: 0.5rem 0.5rem;
+  }
 }
 </style>

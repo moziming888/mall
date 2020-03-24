@@ -55,18 +55,18 @@ export default {
 </script>
 <style scoped>
 .params-info {
-  padding: 10px 15px;
+  padding: 0.6rem 1rem;
   border-bottom: 3px solid rgba(0, 0, 0, 0.1);
 }
 
 .info-sizes {
-  padding: 10px 0;
+  padding: 0.6rem 0;
 }
 .info-title {
-  font-size: 1.2em;
+  font-size: 1.2rem;
   font-weight: bold;
   text-align: center;
-  padding-bottom: 5px;
+  padding-bottom: 0.3rem;
 }
 .info-sizes-table {
   display: flex;
@@ -76,26 +76,24 @@ export default {
 .info-sizes-tr {
   display: flex;
   flex-direction: row;
-  padding: 10px 0;
+  padding: 0.6rem 0;
   border-bottom: 1px solid rgba(100, 100, 100, 0.1);
 }
 .info-sizes-td {
   flex: 1;
 }
 .info-disclaimer {
-  font-size: 0.8em;
-  padding: 8px 0;
-}
-.info-param {
+  font-size: 0.8rem;
+  padding: 0.5rem 0;
 }
 .info-param-item {
   display: flex;
   align-items: center;
-  padding: 10px 0;
+  padding: 0.6rem 0;
   border-bottom: 1px solid rgba(100, 100, 100, 0.1);
 }
 .info-param-key {
-  min-width: 4em;
+  min-width: 4rem;
 }
 .info-param-value {
   color: var(--color-high-text);

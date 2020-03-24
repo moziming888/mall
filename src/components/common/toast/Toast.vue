@@ -28,15 +28,20 @@ export default {
 </script>
 <style scoped>
 .toast {
-  color: #fff;
+  max-width: 70%;
+  text-align: center;
+  color: var(--color-white);
   background: rgba(0, 0, 0, 0.7);
-  padding: 8px 14px;
-  border-radius: 20px;
-  letter-spacing: 0.1em;
+  padding: 0.5rem 0.8rem;
+  border-radius: 1.2rem;
+  letter-spacing: 0.1rem;
   position: fixed;
+  margin: auto;
+  left: 0;
+  right: 0;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 99;
+  /* left: 15%;
+  transform: translate(-15%, -15%); */
+  z-index: 999;
 }
 </style>

@@ -35,8 +35,8 @@ export default {
 .content {
   overflow: hidden;
   position: absolute;
-  top: 44px;
-  bottom: calc(45px + 40px);
+  top: 2.75rem;
+  bottom: calc(2.75rem + 2.5rem);
   left: 0;
   right: 0;
 }

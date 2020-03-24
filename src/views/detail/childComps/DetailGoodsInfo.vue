@@ -55,17 +55,17 @@ export default {
 </script>
 <style scoped>
 .goods-info {
-  padding: 20px 0;
+  padding: 1.25rem 0;
   border-bottom: 5px solid #f2f5f8;
 }
 
 .info-desc {
-  padding: 0 15px;
+  padding: 0 1rem;
 }
 
 .info-desc .start,
 .info-desc .end {
-  width: 90px;
+  width: 5.625rem;
   height: 1px;
   background-color: #a3a3a5;
   position: relative;
@@ -85,7 +85,7 @@ export default {
   position: absolute;
   width: 5px;
   height: 5px;
-  background-color: #333;
+  background-color: var(--color-black-s);
   bottom: 0;
 }
 
@@ -94,12 +94,12 @@ export default {
 }
 
 .info-desc .desc {
-  padding: 15px 0;
+  padding: 1rem 0;
 }
 
 .info-key {
-  margin: 10px 0 10px 15px;
-  color: #333;
+  margin: 0.6rem 0 0.6rem 1rem;
+  color: var(--color-black-s);
   font-size: 1.1em;
   font-weight: bold;
 }
