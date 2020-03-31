@@ -30,57 +30,53 @@
 </template>
 
 <script>
-import { formatDate } from "common/until";
+import { formatDate } from 'common/until'
 export default {
-  name: "DetailCommentInfo",
+  name: 'DetailCommentInfo',
   props: {
     commentInfo: {
       type: Object,
       default() {
-        return {};
+        return {}
       }
     }
   },
   filters: {
     showDate(value) {
       // 将时间戳转化为date对象
-      const date = new Date(value * 1000);
+      const date = new Date(value * 1000)
 
       // 2.将date进行格式化
-      return formatDate(date, "yyyy-MM-dd");
+      return formatDate(date, 'yyyy-MM-dd')
     }
   }
-};
+}
 </script>
-<style scoped>
-.commwnt-info {
-  padding: 1.25rem 1rem;
-  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
-}
-.comment-header {
-  display: flex;
-  justify-content: space-between;
-  margin: 0.6rem 0;
-}
-.comment-user {
-  display: flex;
-  align-items: center;
-  margin: 0.5rem 0;
-}
-.comment-user img {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-}
-.comment-user span {
-  padding-left: 10px;
-}
-.comment-detail .info-other {
-  font-size: 0.8em;
-  padding: 0.5em 0;
-}
-.info-imgs img {
-  width: 24%;
-  padding-right: 1%;
-}
+<style lang="stylus" scoped>
+.commwnt-info 
+  padding 1.25rem 1rem
+  border-bottom 3px solid rgba(0, 0, 0, 0.1)
+  .comment-header 
+    display flex
+    justify-content space-between
+    margin 0.6rem 0
+  .comment-user 
+    display flex
+    align-items center
+    margin 0.5rem 0
+    img 
+      width 3rem
+      height 3rem
+      border-radius 50%
+    span 
+      padding-left 10px
+  .comment-detail 
+    .info-other 
+      font-size 0.8em
+      padding 0.5em 0
+  .info-imgs 
+    img 
+      width 24%
+      padding-right 1%
+
 </style>

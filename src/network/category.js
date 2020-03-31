@@ -1,5 +1,4 @@
-import axios from "./axios";
-
+import axios from './axios'
 
 export function getCategory() {
   return axios({
@@ -16,13 +15,12 @@ export function getSubcategory(maitKey) {
   })
 }
 
-
 export function getCategoryGoods(miniWallkey, type) {
   return axios({
-    url: "/subcategory/detail",
+    url: '/subcategory/detail',
     params: {
       miniWallkey,
       type
     }
-  });
+  })
 }

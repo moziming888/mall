@@ -5,21 +5,19 @@
 </template>
 <script>
 export default {
-  name: "CheckButton",
+  name: 'CheckButton',
   props: {
     isChecked: {
       type: Boolean,
       default: true
     }
   }
-};
+}
 </script>
-<style scoped>
-.check-button {
-  font-size: 1.2rem;
-  color: var(--color-gray-deep);
-}
-.check {
-  color: var(--color-high-text);
-}
+<style lang="stylus" scoped>
+.check-button 
+  font-size 1.2rem
+  color $color-gray-deep
+  &.check 
+    color $color-high-text
 </style>

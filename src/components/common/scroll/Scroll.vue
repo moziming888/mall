@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import BScroll from "better-scroll";
+import BScroll from 'better-scroll'
 
 export default {
-  name: "Scroll",
+  name: 'Scroll',
   props: {
     probeType: {
       type: Number,
@@ -25,10 +25,10 @@ export default {
   data() {
     return {
       scroll: null
-    };
+    }
   },
   mounted() {
-    setTimeout(this._initScroll, 20);
+    setTimeout(this._initScroll, 20)
   },
   methods: {
     _initScroll() {
@@ -38,33 +38,33 @@ export default {
         click: true,
         probeType: this.probeType,
         pullUpLoad: this.pullUpLoad
-      });
+      })
 
       /* 2. 监听滚动的位置, 谁调用，谁绑定 probeType */
       if (this.probeType === 2 || this.probeType === 3) {
-        this.scroll.on("scroll", position => {
-          this.$emit("scroll", position);
-        });
+        this.scroll.on('scroll', position => {
+          this.$emit('scroll', position)
+        })
       }
 
       /* 3. 监听scroll滚动到底部，上拉事件，谁调用，谁绑定 pullUpLoad */
       if (this.pullUpLoad) {
-        this.scroll.on("pullingUp", () => {
-          // console.log("上拉加载");
-          this.$emit("pullingUp");
-        });
+        this.scroll.on('pullingUp', () => {
+          console.log('上拉加载')
+          this.$emit('pullingUp')
+        })
       }
     },
     scrollTo(x, y, time = 300) {
-      this.scroll && this.scroll.scrollTo(x, y, time);
+      this.scroll && this.scroll.scrollTo(x, y, time)
     },
     refresh() {
       // console.log("重刷新次数");
-      this.scroll && this.scroll.refresh();
+      this.scroll && this.scroll.refresh()
     },
     // 完成上拉
     finishPullUp() {
-      this.scroll && this.scroll.finishPullUp();
+      this.scroll && this.scroll.finishPullUp()
     }
   }
   /*  watch: {
@@ -72,10 +72,9 @@ export default {
       setTimeout(this.refresh, 20);
     }
   } */
-};
+}
 /*
  ** ref 如果是绑定在组件中的，那么通过this.$ref.refname获取到的是一个组件对象
  ** ref 如果是绑定在普通元素中，那么通过this.$ref.refname获取到的是一个元素对象
  */
 </script>
-<style scoped></style>

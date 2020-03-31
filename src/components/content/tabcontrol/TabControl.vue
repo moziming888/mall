@@ -14,47 +14,45 @@
 
 <script>
 export default {
-  name: "TabControl",
+  name: 'TabControl',
   props: {
     titles: {
       type: Array,
       default() {
-        return [];
+        return []
       }
     }
   },
   data() {
     return {
       currentIndex: 0
-    };
+    }
   },
   methods: {
     itemClick(index) {
-      this.currentIndex = index;
+      this.currentIndex = index
       // 把itemClick 传递给父组件的tabClick
-      this.$emit("tabClick", index);
+      this.$emit('tabClick', index)
     }
   }
-};
+}
 </script>
-<style scoped>
-.tab-control {
-  display: flex;
-  text-align: center;
-  font-size: 1.6;
-  height: 40px;
-  line-height: 40px;
-}
-.tab-control-item {
-  flex: 1;
-}
-.tab-control-item span {
-  padding: 5px;
-}
-.active {
-  color: var(--color-high-text);
-}
-.active span {
-  border-bottom: 2px solid var(--color-tint);
-}
+<style lang="stylus" scoped>
+.tab-control 
+  display flex
+  justify-content space-evenly
+  align-items center
+  text-align center
+  font-size 1.6
+  height 2.5rem
+  line-height 2.5rem
+  .tab-control-item 
+    flex 1
+    span 
+      padding .3rem
+    &.active 
+      color $color-high-text
+      span 
+        border-bottom 2px solid $color-tint
+
 </style>

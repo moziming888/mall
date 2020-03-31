@@ -1,19 +1,19 @@
 <template>
-  <div id="category">
+  <div class="category">
     <nav-bar class="nav-bar">
       <div slot="center">商品分类</div>
     </nav-bar>
     <tab-control
       class="tab-control top-tab-control"
       :titles="['综合', '新品', '销量']"
-      @tabClick="tabClick"
+      @tabClick="tabClickHome"
       ref="topTabControl"
       v-show="isTabFixed"
     />
     <tab-menu class="menu" :categories="categories" @selectItem="selectItem" />
 
     <scroll
-      class="scroll-content"
+      class="content"
       ref="scroll"
       :probe-type="3"
       @scroll="contentScroll"
@@ -26,53 +26,50 @@
       <tab-control
         class="tab-control"
         :titles="['综合', '新品', '销量']"
-        @tabClick="tabClick"
+        @tabClick="tabClickHome"
         ref="tabControl"
       />
-      <tab-content-goods :category-goods="showCategoryGoods" />
+      <goods-list :goods-list="showCategoryGoods" />
     </scroll>
 
     <back-top @click.native="backTop" v-show="isShowBackTop" />
+    <main-tab-bar />
   </div>
 </template>
 
 <script>
-import NavBar from "components/common/navbar/NavBar";
-import TabMenu from "./childComps/TabMenu";
-import Scroll from "components/common/scroll/Scroll";
-import TabContentCategory from "./childComps/TabContentCategory";
-import TabControl from "components/content/tabcontrol/TabControl";
-import TabContentGoods from "./childComps/TabContentGoods";
+import NavBar from 'components/common/navbar/NavBar'
+import TabMenu from './childComps/TabMenu'
+import Scroll from 'components/common/scroll/Scroll'
+import TabContentCategory from './childComps/TabContentCategory'
+import TabControl from 'components/content/tabcontrol/TabControl'
+import GoodsList from 'components/content/goods/GoodsList'
 
-import {
-  getCategory,
-  getSubcategory,
-  getCategoryGoods
-} from "network/category";
-import { BACKTOP_DISTANCE, POP, SELL, NEW } from "common/const";
-import { itemListenerMixin, backTopMixin, tabControlMixin } from "common/mixin";
+import { getCategory, getSubcategory, getCategoryGoods } from 'network/category'
+import { BACKTOP_DISTANCE, POP, SELL, NEW } from 'common/const'
+import { itemListenerMixin, backTopMixin, tabControlMixin } from 'common/mixin'
 
 export default {
-  name: "Category",
+  name: 'Category',
   components: {
     NavBar,
     TabMenu,
     Scroll,
     TabContentCategory,
     TabControl,
-    TabContentGoods
+    GoodsList
   },
   mixins: [itemListenerMixin, backTopMixin, tabControlMixin],
   data() {
     return {
+      isTabFixed: false,
       categories: [],
       categoryData: {},
-      currentIndex: -1,
-      isTabFixed: false
-    };
+      currentIndex: -1
+    }
   },
   created() {
-    this._getCategory();
+    this._getCategory()
     // this._getSubcategories();
     // this._getCategoryGoods();
   },
@@ -82,14 +79,14 @@ export default {
   }, */
   computed: {
     showSubcategory() {
-      if (this.currentIndex === -1) return {};
-      return this.categoryData[this.currentIndex].subcategories;
+      if (this.currentIndex === -1) return {}
+      return this.categoryData[this.currentIndex].subcategories
     },
     showCategoryGoods() {
-      if (this.currentIndex === -1) return [];
+      if (this.currentIndex === -1) return []
       return this.categoryData[this.currentIndex].categoryGoods[
         this.currentType
-      ];
+      ]
     }
   },
   methods: {
@@ -101,7 +98,7 @@ export default {
         // console.log(res);
 
         // 1.获取左侧分类数据
-        this.categories = res.data.category.list;
+        this.categories = res.data.category.list
 
         // 2.初始化每个类别的子数据
         for (let i = 0; i < this.categories.length; i++) {
@@ -113,33 +110,33 @@ export default {
               // new: [],
               // sell: []
             }
-          };
+          }
         }
         // 3.请求第一个分类的数据
-        this._getSubcategories(0);
-      });
+        this._getSubcategories(0)
+      })
     },
     _getSubcategories(index) {
-      this.currentIndex = index;
-      const mailKey = this.categories[index].maitKey;
+      this.currentIndex = index
+      const mailKey = this.categories[index].maitKey
       getSubcategory(mailKey).then(res => {
-        this.categoryData[index].subcategories = res.data;
-        this.categoryData = { ...this.categoryData };
-        this._getCategoryGoods(POP);
-        this._getCategoryGoods(NEW);
-        this._getCategoryGoods(SELL);
-        console.log(res);
-      });
+        this.categoryData[index].subcategories = res.data
+        this.categoryData = { ...this.categoryData }
+        this._getCategoryGoods(POP)
+        this._getCategoryGoods(NEW)
+        this._getCategoryGoods(SELL)
+        // console.log(res)
+      })
     },
     _getCategoryGoods(type) {
       // 1.获取请求的miniWallkey
-      const miniWallkey = this.categories[this.currentIndex].miniWallkey;
+      const miniWallkey = this.categories[this.currentIndex].miniWallkey
       // 2.发送请求,传入miniWallkey和type
       getCategoryGoods(miniWallkey, type).then(res => {
         // 3.将获取的数据保存下来
-        this.categoryData[this.currentIndex].categoryGoods[type] = res;
-        this.categoryData = { ...this.categoryData };
-      });
+        this.categoryData[this.currentIndex].categoryGoods[type] = res
+        this.categoryData = { ...this.categoryData }
+      })
     },
 
     /**
@@ -147,59 +144,55 @@ export default {
      */
     selectItem(index) {
       // 点击分类显示对应的子分类
-      this._getSubcategories(index);
+      this._getSubcategories(index)
+      // 重置tab的index的值
+      this.tabClickHome((index = 0))
     },
     subImageLoad() {
       // 子分类subcategory图片的防抖,newRefresh在minix里面
-      this.newRefresh();
+      this.newRefresh()
     },
     contentScroll(position) {
       // 1.是否显示返回顶部图标
-      this.isShowBackTop = -position.y > BACKTOP_DISTANCE;
+      this.isShowBackTop = -position.y > BACKTOP_DISTANCE
+
       // 2.判断tabControl是否吸顶(position: fixed)
-      this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop;
-      this.isTabFixed = -position.y > this.tabOffsetTop;
+      this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop
+      this.isTabFixed = -position.y > this.tabOffsetTop
     },
     /* topControl事件监听 */
     tabClickHome(index) {
-      this.tabClick(index);
+      this.tabClick(index)
       // 让两个tabControl的currentIndex保持一致
-      this.$refs.topTabControl.currentIndex = index;
-      this.$refs.tabControl.currentIndex = index;
+      this.$refs.tabControl.currentIndex = index
+      this.$refs.topTabControl.currentIndex = index
     }
   }
-};
+}
 </script>
-<style scoped>
-#category {
-  height: 100vh;
-}
-.nav-bar {
-  background-color: var(--color-tint);
-  color: var(--color-white);
-}
-.scroll-content {
-  overflow: hidden;
-  position: absolute;
-  top: 2.75rem;
-  bottom: 2.75rem;
-  left: 5.625rem;
-  right: 0;
-  /* calc计算属性，tab-control吸顶时不平滑，没有absolute平滑 */
-  /* height: calc(100% - 89px); */
-}
-.tab-control {
-  position: relative;
-  z-index: 9;
-  background-color: var(--color-white);
-}
-.top-tab-control {
-  width: calc(100vw - 5.5rem);
-  padding-left: 2px;
-  position: absolute;
-  top: 2.75rem;
-  left: 5.5rem;
-  right: 0;
-  z-index: 999;
-}
+<style lang="stylus" scoped>
+.category
+  .nav-bar 
+    background-color $color-tint
+    color $color-white
+  .content 
+    overflow hidden
+    position absolute
+    top 2.75rem
+    bottom 2.75rem
+    left 5.625rem
+    right 0
+    /* calc计算属性，tab-control吸顶时不平滑，没有absolute平滑 */
+    /* height: calc(100% - 89px); */
+  .top-tab-control 
+    width calc(100vw - 5.5rem)
+    padding-left 2px
+    position absolute
+    top 2.75rem
+    left 5.5rem
+    right 0
+    right 0
+    z-index 999
+    background-color $color-white
+
 </style>

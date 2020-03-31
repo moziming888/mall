@@ -13,20 +13,13 @@
       </span>
     </div>
     <i class="cart el-icon-shopping-cart-2" slot="right" @click="cartClick"></i>
-    <!-- <img
-      slot="right"
-      class="cart"
-      @click="cartClick"
-      src="~assets/img/detail/cart.svg"
-      alt=""
-    /> -->
   </nav-bar>
 </template>
 
 <script>
-import NavBar from "components/common/navbar/NavBar";
+import NavBar from 'components/common/navbar/NavBar'
 export default {
-  name: "DetailNavBar",
+  name: 'DetailNavBar',
   components: {
     NavBar
   },
@@ -34,50 +27,44 @@ export default {
     titleInfos: {
       type: Array,
       default() {
-        return ["商品", "参数", "评论", "推荐"];
+        return ['商品', '参数', '评论', '推荐']
       }
     }
   },
   data() {
     return {
       currentIndex: 0
-    };
+    }
   },
   methods: {
     itemClick(index) {
-      this.currentIndex = index;
-      this.$emit("titleClick", index);
+      this.currentIndex = index
+      this.$emit('titleClick', index)
     },
     backClick() {
-      this.$router.back();
+      this.$router.back()
       // this.$router.go(-1);
     },
     cartClick() {
-      this.$router.push("/cart");
+      this.$router.push('/cart')
     }
   }
-};
+}
 </script>
-<style scoped>
-.detail-nav-bar {
-  font-weight: normal;
-  background: var(--color-white);
-}
-.back {
-  font-size: 1.5rem;
-}
-.title {
-  display: flex;
-  align-items: center;
-  font-size: 1.1rem;
-}
-.title-item {
-  flex: 1;
-}
-.title-item.active {
-  color: var(--color-high-text);
-}
-.cart {
-  font-size: 1.5rem;
-}
+<style lang="stylus" scoped>
+.detail-nav-bar 
+  font-weight normal
+  background $color-white
+  .back 
+    font-size 1.5rem
+  .title 
+    display flex
+    align-items center
+    font-size 1.1rem
+    .title-item 
+      flex 1
+      &.active 
+        color $color-high-text
+  .cart 
+    font-size 1.5rem
 </style>

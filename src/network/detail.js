@@ -11,7 +11,7 @@ export function getDetail(iid) {
 
 export function getReCommend() {
   return axios({
-    url: '/recommend',
+    url: '/recommend'
   })
 }
 

@@ -14,12 +14,12 @@
 
 <script>
 export default {
-  name: "DetailSwiper",
+  name: 'DetailSwiper',
   props: {
     topImages: {
       type: Array,
       default() {
-        return [];
+        return []
       }
     }
   },
@@ -28,7 +28,7 @@ export default {
       swiperOption: {
         //显示分页
         pagination: {
-          el: ".swiper-pagination"
+          el: '.swiper-pagination'
         },
         //自动轮播
         autoplay: {
@@ -39,27 +39,29 @@ export default {
         //开启循环模式
         loop: true
       }
-    };
+    }
   },
   computed: {
     swiper() {
-      return this.$refs.detailSwiper.swiper;
+      return this.$refs.detailSwiper.swiper
     }
   }
-};
+}
 </script>
-<style scoped>
-@import "~assets/css/swiper-pagination.css";
-.swiper-slide {
-  width: 100%;
-  height: 50vh;
-  /* 垂直居中 */
-  display: flex;
-  align-items: center;
-  /* 水平居中 */
-  /* justify-content: center; */
-}
-.swiper-slide img {
-  width: 100%;
-}
+<style lang="stylus" scoped>
+.swiper-slide 
+  width 100%
+  height 50vh
+  display flex
+  align-items center
+  img 
+    width 100%
+    text-align center
+
+.swiper-pagination >>>.swiper-pagination-bullet 
+  opacity 1
+  background $color-white
+  .swiper-pagination-bullet-active 
+    opacity 1
+    background $color-high-text
 </style>
