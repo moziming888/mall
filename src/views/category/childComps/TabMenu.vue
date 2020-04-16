@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import Scroll from 'components/common/scroll/Scroll'
+import Scroll from 'components/scroll/Scroll'
 
 export default {
   name: 'TabMenu',

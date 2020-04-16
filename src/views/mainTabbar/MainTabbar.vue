@@ -57,7 +57,7 @@ export default {
   display flex
   justify-content space-around
   align-items center
-  position fixed
+  position absolute
   left 0
   right 0
   bottom 0

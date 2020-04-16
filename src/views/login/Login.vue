@@ -1,6 +1,7 @@
 <template>
   <div class="login">
     <nav-bar>
+      <i class="back el-icon-arrow-left" slot="left" @click="backClick"></i>
       <div slot="center">登录</div>
     </nav-bar>
     <form class="login_form" @submit.prevent="loginSubmit">
@@ -30,7 +31,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import NavBar from 'components/common/navbar/NavBar'
+import NavBar from 'components/navbar/NavBar'
 export default {
   name: 'Login',
   components: {
@@ -87,6 +88,9 @@ export default {
       } else {
         this.$toast.show('登录失败，请重新登录！')
       }
+    },
+    backClick() {
+      this.$router.push('/home')
     }
   }
 }
@@ -97,7 +101,7 @@ export default {
   z-index 999
   background-color $color-background
   .login_form
-    max-width 750px
+    max-width 90%
     margin 0 auto
     padding-top 1rem
     .login_section
@@ -124,10 +128,10 @@ export default {
         position absolute
         top 0
         right .5rem
-        background-color: $color-gray-s
+        background-color: $color-gray
         color: $color-white
         &.check_phone
-          background-color: $color-red
+          background-color: $color-orange
     .login_agreement
       padding 1rem 0
       font-size .8rem

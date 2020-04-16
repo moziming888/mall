@@ -1,22 +1,19 @@
 import {
   INCREMENT_CART_COUNT,
   DECREMENT_CART_COUNT,
-  CLEAR_CART
 } from './mutation-types'
 export default {
-  addCart(context, payload) {
+  addCart({ commit, state }, payload) {
     // 1.查看是否添加过
-    let oldProduct = context.state.cartList.find(
-      item => item.iid === payload.iid
-    )
+    let oldProduct = state.cartList.find(item => item.iid === payload.iid)
+
     // 2.+1 或者新添加
     if (oldProduct) {
-      // oldProduct.count += 1
-      context.commit('addCounter', oldProduct)
+      commit('addCounter', oldProduct)
     } else {
       payload.count = 1
-      // context.state.cartList.push(payload)
-      context.commit('addToCart', payload)
+      // state.cartList.push(payload)
+      commit('addToCart', payload)
     }
   },
   // 同步更新购物车中item的count值
@@ -28,8 +25,4 @@ export default {
     }
   },
 
-  // 同步清空购物车
-  clearCart({ commit }) {
-    commit(CLEAR_CART)
-  }
 }

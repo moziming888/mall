@@ -1,5 +1,5 @@
 <template>
-  <div class="detail">
+  <div id="detail">
     <detail-nav-bar ref="navBar" @titleClick="titleClick" />
     <scroll
       class="content"
@@ -25,15 +25,16 @@
 
 <script>
 import DetailNavBar from './childComps/DetailNavBar'
-import Scroll from 'components/common/scroll/Scroll'
 import DetailSwiper from './childComps/DetailSwiper'
 import DetailBaseInfo from './childComps/DetailBaseInfo'
 import DetailShopInfo from './childComps/DetailShopInfo'
 import DetailGoodsInfo from './childComps/DetailGoodsInfo'
 import DetailParamsInfo from './childComps/DetailParamsInfo'
 import DetailCommentInfo from './childComps/DetailCommentInfo'
-import GoodsList from 'components/content/goods/GoodsList'
+import GoodsList from 'components/goods/GoodsList'
 import DetailBottomBar from './childComps/DetailBottomBar'
+
+import Scroll from 'components/scroll/Scroll'
 
 import { getDetail, getReCommend, BaseInfo } from 'network/detail'
 import { debounce } from 'common/until'
@@ -57,6 +58,7 @@ export default {
   mixins: [itemListenerMixin, backTopMixin],
   data() {
     return {
+      iid: '',
       topImages: [],
       baseInfo: {},
       shopInfo: {},
@@ -89,14 +91,15 @@ export default {
   },
   methods: {
     _getDetail() {
-      // 一、保存传入的id，使用 props 解耦方式，this.id = res.iid;
-      const id = this.id
+      // 一、保存传入的id，使用 props 解耦方式，this.iid = this.id;
+      // this.iid = this.$route.params.id
+      const iid = this.id
+      this.iid = iid
 
       // 二、根据iid请求详细数据
-      getDetail(id).then(res => {
-        this.id = res.iid
+      getDetail(iid).then(res => {
+        // console.log(res);
         // 1. 获取数据
-        console.log(res)
         const data = res.result
 
         // 2.获取顶部的图片轮播数据
@@ -152,7 +155,7 @@ export default {
       // 1.获取y值
       const positionY = -position.y
 
-      // 2.nav的tab菜单点击到达某处，positionY 和themeTopYs 进行对比
+      // 2.positionY 和主题中值themeTopYs 进行对比
       let length = this.themeTopYs.length
       for (let i = 0; i < length - 1; i++) {
         /*
@@ -170,6 +173,7 @@ export default {
           if (this.currentIndex !== i) {
             this.currentIndex = i
             this.$refs.navBar.currentIndex = this.currentIndex
+            // console.log(this.currentIndex);
           }
           break
         }
@@ -194,25 +198,21 @@ export default {
   }
 }
 </script>
-<style lang="stylus" scoped>
-.detail 
-  height 100vh
-  position relative
-  z-index 1
-  background $color-white
-  .tab-fixed
-    position fixed
-    top 2.75rem
-    width 100%
-    background-color $color-white
-    z-index 9
-  .content 
-    overflow hidden
-    /* calc计算属性，tab-control吸顶时不平滑，没有absolute平滑 */
-    /* height: calc(100% - 44px); */
-    position absolute
-    top 2.75rem
-    bottom 3.25rem
-    left 0
-    right 0
+<style scoped>
+#detail {
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+  background: var(--color-white);
+}
+.content {
+  overflow: hidden;
+  /* calc计算属性，tab-control吸顶时不平滑，没有absolute平滑 */
+  /* height: calc(100% - 44px); */
+  position: absolute;
+  top: 44px;
+  bottom: 52px;
+  left: 0;
+  right: 0;
+}
 </style>

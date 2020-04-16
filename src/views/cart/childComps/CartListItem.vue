@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import CartControl from './CartControl'
 import CheckButton from './CheckButton'
 
@@ -50,7 +50,6 @@ export default {
     }
   },
   computed: {
-    ...mapState(['cartFoods']),
     ...mapGetters(['totalCount', 'totalPrice'])
   },
   methods: {

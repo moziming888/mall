@@ -20,8 +20,9 @@ export default {
   align-items center
   height 2.75rem
   text-align center
-  .left, .right 
-    width 3.75rem
+  padding 0 1rem
+  i
+    font-size 1.5rem
   .center 
     flex 1
 

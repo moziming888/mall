@@ -26,15 +26,13 @@
       </div>
       <footer class="copyright">{{ copyright }}</footer>
     </scroll>
-
-    <main-tab-bar />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import Scroll from 'components/common/scroll/Scroll'
-import NavBar from 'components/common/navbar/NavBar'
+import Scroll from 'components/scroll/Scroll'
+import NavBar from 'components/navbar/NavBar'
 import HeaderIconInfo from './childComps/HeaderIconInfo'
 import AvatarInfo from './childComps/AvatarInfo'
 import CardInfo from './childComps/CardInfo'
@@ -95,7 +93,7 @@ export default {
           icon: 'el-icon-setting'
         }
       ],
-      copyright: '拉扎斯网络科技有限公司'
+      copyright: '莫子ming'
     }
   },
   computed: {
@@ -128,6 +126,6 @@ export default {
       font-size .6rem
       padding 1.5rem 0
       text-align center
-      color $color-gray-s
+      color $color-gray
       background-color $color-background
 </style>

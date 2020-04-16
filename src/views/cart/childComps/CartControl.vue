@@ -16,7 +16,6 @@ export default {
   props: {
     item: Object
   },
-  computed: {},
   methods: {
     ...mapMutations(['addCounter']),
     updateFoodCount(isAdd) {

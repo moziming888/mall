@@ -1,7 +1,7 @@
 import { debounce } from 'common/until'
 import { POP, NEW, SELL } from './const'
 
-import BackTop from 'components/common/backTop/BackTop'
+import BackTop from 'components/backTop/BackTop'
 
 // 对GoodsLIistItem的图片进行防抖，直接引用即可。但是需要销毁，因为点击其他页面时，不需要监听
 export const itemListenerMixin = {

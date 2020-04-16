@@ -33,17 +33,16 @@
     </scroll>
 
     <back-top @click.native="backTop" v-show="isShowBackTop" />
-    <main-tab-bar />
   </div>
 </template>
 
 <script>
-import NavBar from 'components/common/navbar/NavBar'
+import NavBar from 'components/navbar/NavBar'
 import TabMenu from './childComps/TabMenu'
-import Scroll from 'components/common/scroll/Scroll'
+import Scroll from 'components/scroll/Scroll'
 import TabContentCategory from './childComps/TabContentCategory'
-import TabControl from 'components/content/tabcontrol/TabControl'
-import GoodsList from 'components/content/goods/GoodsList'
+import TabControl from 'components//tabcontrol/TabControl'
+import GoodsList from 'components//goods/GoodsList'
 
 import { getCategory, getSubcategory, getCategoryGoods } from 'network/category'
 import { BACKTOP_DISTANCE, POP, SELL, NEW } from 'common/const'
@@ -185,7 +184,7 @@ export default {
     /* calc计算属性，tab-control吸顶时不平滑，没有absolute平滑 */
     /* height: calc(100% - 89px); */
   .top-tab-control 
-    width calc(100vw - 5.5rem)
+    // width calc(100vw - 5.5rem)
     padding-left 2px
     position absolute
     top 2.75rem

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import NavBar from 'components/common/navbar/NavBar'
+import NavBar from 'components/navbar/NavBar'
 export default {
   name: 'DetailNavBar',
   components: {
@@ -39,7 +39,7 @@ export default {
   methods: {
     itemClick(index) {
       this.currentIndex = index
-      this.$emit('titleClick', index)
+      this.$emit('itemClick', index)
     },
     backClick() {
       this.$router.back()
@@ -55,8 +55,6 @@ export default {
 .detail-nav-bar 
   font-weight normal
   background $color-white
-  .back 
-    font-size 1.5rem
   .title 
     display flex
     align-items center
@@ -65,6 +63,4 @@ export default {
       flex 1
       &.active 
         color $color-high-text
-  .cart 
-    font-size 1.5rem
 </style>

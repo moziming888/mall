@@ -12,7 +12,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Scroll from 'components/common/scroll/Scroll'
+import Scroll from 'components/scroll/Scroll'
 import CartListItem from './CartListItem'
 
 export default {
@@ -33,9 +33,7 @@ export default {
     overflow hidden
     position absolute
     top 2.75rem
-    // 2.75rem + 2.5rem
     bottom 5.25rem
     left 0
     right 0
-
 </style>

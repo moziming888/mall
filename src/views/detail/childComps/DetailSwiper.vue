@@ -58,10 +58,11 @@ export default {
     width 100%
     text-align center
 
-.swiper-pagination >>>.swiper-pagination-bullet 
-  opacity 1
-  background $color-white
-  .swiper-pagination-bullet-active 
+.swiper-pagination 
+  >>> .swiper-pagination-bullet 
+    opacity 1
+    background $color-white
+  >>> .swiper-pagination-bullet-active 
     opacity 1
     background $color-high-text
 </style>

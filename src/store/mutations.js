@@ -1,4 +1,8 @@
-import { INCREMENT_CART_COUNT, DECREMENT_CART_COUNT } from './mutation-types'
+import {
+  INCREMENT_CART_COUNT,
+  DECREMENT_CART_COUNT,
+  CART_LIST
+} from './mutation-types'
 
 export default {
   // 本地localStorage的用户名同步到vuex
@@ -44,6 +48,9 @@ export default {
   },
   addToCart(state, payload) {
     payload.checked = true
+    state.cartList.push(payload)
+  },
+  cartList(state, payload) {
     state.cartList.push(payload)
   }
 }

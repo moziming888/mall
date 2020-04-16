@@ -9,8 +9,7 @@ import VueLazyload from 'vue-lazyload'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
-import toast from 'components/common/toast'
-import MainTabBar from 'components/content/mainTabbar/MainTabBar'
+import toast from 'components/toast'
 
 Vue.config.productionTip = false
 
@@ -25,14 +24,8 @@ Vue.use(VueLazyload, {
 // 安装toast插件
 Vue.use(toast)
 
-// 底部菜单全局组件
-Vue.component('MainTabBar', MainTabBar)
-
 // 解决移动端300ms的延迟
 FastClick.attach(document.body)
-
-// import { Button } from "element-ui";
-// Vue.use(Button);
 
 new Vue({
   router,

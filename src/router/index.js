@@ -1,52 +1,55 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from 'views/home/Home.vue'
+// import Home from 'views/home/Home.vue'
 
-const Category = () => import('views/category/Category.vue')
-const Cart = () => import('views/cart/Cart.vue')
-const Profile = () => import('views/profile/Profile.vue')
-const Setting = () => import('views/profile/childComps/Setting')
-const Detail = () => import('views/detail/Detail.vue')
-const Login = () => import('views/user/Login.vue')
+const page = name => () => import(`views/${name}`)
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/main-tabbar'
   },
   {
-    path: '/home',
-    component: Home
+    path: '/main-tabbar',
+    component: page('mainTabbar'),
+    redirect: '/home',
+    children: [
+      {
+        path: '/home',
+        component: page('home/Home')
+      },
+      {
+        path: '/category',
+        component: page('category/Category.vue')
+      },
+      {
+        path: '/cart',
+        component: page('cart/Cart')
+      },
+      {
+        path: '/profile',
+        component: page('profile/Profile.vue'),
+        meta: {
+          requireAuth: true
+        }
+      }
+    ]
   },
-  {
-    path: '/category',
-    component: Category
-  },
-  {
-    path: '/cart',
-    component: Cart
-  },
-  {
-    path: '/profile',
-    component: Profile,
-    meta: {
-      requireAuth: true
-    }
-  },
+
   {
     path: '/setting',
-    component: Setting
+    component: page('profile/childComps/Setting')
   },
   {
     path: '/detail/:id',
-    component: Detail,
+    component: page('detail/Detail'),
     props: true
   },
   {
     path: '/login',
-    component: Login
+    component: page('login/Login')
   }
 ]
 

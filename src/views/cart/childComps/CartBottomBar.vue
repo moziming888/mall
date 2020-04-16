@@ -14,7 +14,8 @@
       </div>
     </div>
 
-    <div class="bar-right" @click="calcClick">去结算</div>
+    <div class="bar-right" v-if="!isManage" @click="calcClick">去结算</div>
+    <div class="right-delete" v-else @click="deleteClick()">删除</div>
   </div>
 </template>
 
@@ -26,6 +27,11 @@ export default {
   name: 'CarttBottonBar',
   components: {
     CheckButton
+  },
+  props: {
+    isManage: {
+      type: Boolean
+    }
   },
   computed: {
     ...mapGetters(['cartList', 'cartLength']),
@@ -50,21 +56,34 @@ export default {
     }
   },
   methods: {
+    // ...mapMutations('deleteCart'),
     checkClick() {
       if (this.isSelectAll) {
         this.cartList.forEach(item => (item.checked = false))
       } else {
         this.cartList.forEach(item => (item.checked = true))
       }
-      // console.log("--");
     },
     calcClick() {
       // 把toast做成了插件形式，所以不需要import引用
-      if (!this.isSelectAll) {
+      if (this.totalPrice === 0) {
         this.$toast.show('请选择购买的商品')
       } else {
         this.$toast.show('正在跳转到结算页...')
       }
+    },
+    // 删除选中的
+    deleteClick() {
+      for (var i = this.cartList.length - 1; i >= 0; i--) {
+        if (this.cartList[i].checked === true) {
+          this.cartList.splice(i, 1)
+        }
+      }
+      // this.cartList.forEach(item => {
+      //   if ((item.checked = true)) {
+      //     this.cartList.splice(item, 1)
+      //   }
+      // })
     }
   }
 }
@@ -75,7 +94,7 @@ export default {
   line-height 2.5rem
   padding 0.3rem .5rem
   background $color-gray-s
-  position fixed
+  position absolute
   left 0
   right 0
   bottom 2.8rem
@@ -94,10 +113,17 @@ export default {
     .price 
       color $color-red
   .bar-right 
-    font-size 1.1em
+    font-size 1.1rem
     color $color-white
     line-height 1.5
     padding 0 1rem
     background $color-background-linear-o
+    border-radius: 1.2rem
+  .right-delete
+    font-size 1rem
+    padding 0 1rem
+    line-height 1.5
+    color $color-red
+    border 1px $color-red solid
     border-radius: 1.2rem
 </style>

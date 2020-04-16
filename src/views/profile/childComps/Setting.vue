@@ -46,7 +46,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
-import NavBar from 'components/common/navbar/NavBar'
+import NavBar from 'components/navbar/NavBar'
 import ListItem from './ListItem'
 import List from './List'
 
@@ -102,7 +102,7 @@ export default {
     },
     logout() {
       this.loginOut()
-      this.$router.push('/profile')
+      this.$router.push('/home')
     }
   }
 }
