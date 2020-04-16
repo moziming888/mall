@@ -10,7 +10,7 @@
     <div class="cart-content">
       <div class="text" v-if="cartLength === 0">购物车竟然是空的~~</div>
       <cart-list v-else />
-      <cart-bottom-bar ref="bottomBar" :is-manage="isManage" />
+      <cart-bottom-bar :is-manage="isManage" />
     </div>
   </div>
 </template>
@@ -38,7 +38,6 @@ export default {
   },
   methods: {
     manageCart() {
-      // this.refs.bottomBar.
       this.isManage = !this.isManage
     }
   }

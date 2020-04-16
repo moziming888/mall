@@ -50,8 +50,8 @@ export default {
       /* 3. 监听scroll滚动到底部，上拉事件，谁调用，谁绑定 pullUpLoad */
       if (this.pullUpLoad) {
         this.scroll.on('pullingUp', () => {
-          console.log('上拉加载')
           this.$emit('pullingUp')
+          console.log('上拉加载')
         })
       }
     },

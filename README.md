@@ -18,9 +18,9 @@ npm run serve
 npm run build
 ```
 
-## <a href="mogujie.moziming.cn" target="_blank">项目线上地址</a>
+## <a href="mogujie.moziming.cn" target="_blank">项目线上地址:http://mogujie.moziming.cn</a>
 
-## 技术栈: vue vuex vue-router syulus element-ui better-scroll
+## 技术栈: vue vuex vue-router syulus axios element-ui better-scroll
 
 ## 项目完成列表
 
@@ -40,20 +40,20 @@ npm run build
 
 ### 首页
 
-<img src="./public/imgShow/home.gif" alt="">
+<img src="https://github.com/moziming888/mall/blob/master/public/imgShow/home.gif" alt="">
 
 ### 分类页
 
-<img src="./public/imgShow/category.gif" alt="">
+<img src="https://github.com/moziming888/mall/blob/master/public/imgShow/category.gif" alt="">
 
 ### 购物车页
 
-<img src="./public/imgShow/cart.gif" alt="">
+<img src="https://github.com/moziming888/mall/blob/master/public/imgShow/cart.gif" alt="">
 
 ### 个人页面及登录页
 
-<img src="./public/imgShow/profile.gif" alt="">
+<img src="https://github.com/moziming888/mall/blob/master/public/imgShow/profile.gif" alt="">
 
 ### 详情页
 
-<img src="./public/imgShow/detail.gif" alt="">
+<img src="https://github.com/moziming888/mall/blob/master/public/imgShow/detail.gif" alt="">
